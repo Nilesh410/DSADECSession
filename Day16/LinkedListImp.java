@@ -1,6 +1,7 @@
 package Day16;
 
-class Node
+//Node creation 
+class Node    
 {
     public int data;
     public Node next;
@@ -10,10 +11,52 @@ class Node
         next=null;
     }
 }
+class LinkedList
+{
+    Node head;
+    public LinkedList()
+    {
+        head=null;
+    }
+    public void insertAtFirst(int num)
+    {
+        Node newNode=new Node(num);
+        if(head==null)
+        {
+            head=newNode;
+        }
+        else
+        {
+            newNode.next=head;
+            head=newNode;
+        }
+    }
+    public void insertAtLast(int num)
+    {
+        Node newNode=new Node(num);
+        if(head==null)
+        {
+            head=newNode;
+        }
+        else if(head.next==null)
+        {
+            head.next=newNode;h
+        }
+        else
+        {
+            Node temp=head;
+            while(temp.next!=null)
+            {
+                temp=temp.next;
+            }
+            temp.next=newNode;
+        }
+    }
+}
 public class LinkedListImp {
     public static void main(String[] args) {
-        Node new_node=new Node(12);
-        System.out.println(new_node.data);
-        System.out.println(new_node.next);
+        LinkedList l=new LinkedList();
+        l.insertAtFirst(12);
+     
     }
 }
