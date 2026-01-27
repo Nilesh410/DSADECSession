@@ -52,6 +52,81 @@ class LinkedList
             temp.next=newNode;
         }
     }
+    public void insertInBetween(int num,int pos)
+    {
+        if(head==null)
+        {
+            System.out.println("Linked list is empty");
+            return;
+        }
+        Node newNode=new Node(num);
+        Node curr=head;
+        Node prev=null;
+        while(curr.data!=pos && curr!=null)
+        {
+            prev=curr;
+            curr=curr.next;
+        }
+        if(curr==null)
+        {
+            System.out.println("Linked does not have that pos");
+            return ;
+        }
+        newNode.next=curr.next;
+        curr.next=newNode;
+    }
+    public void deleteFirstNode()
+    {
+        if(head==null)
+        {
+            System.out.println("Linked list is empty");
+            return ;
+        }
+        head=head.next;
+    }
+    public void deleteLastNode()
+    {
+        if(head==null)
+        {
+            System.out.println("Linked list is empty");
+            return ;
+        }
+        else if(head.next==null)
+        {
+            head=null;
+            return ;
+        }
+        else
+        {
+            Node temp=head;
+            while(temp.next.next!=null)
+            {
+                temp=temp.next;
+            }
+            temp.next=null;
+        }
+    }
+    public void deleteAnyNode(int value)
+    {
+        if(head==null)
+        {
+            System.out.println("Linked list is empty");
+            return ;
+        }
+        Node prev=null;
+        Node curr=head;
+        while(curr.data!=value&&curr!=null)
+        {
+            prev=curr;
+            curr=curr.next;
+        }
+        if(curr==null)
+        {
+            System.out.println("Linked list does not have that value");
+            return ;
+        }
+        prev.next=curr.next;
+    }
 }
 public class LinkedListImp {
     public static void main(String[] args) {
