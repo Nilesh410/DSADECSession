@@ -13,35 +13,29 @@ class Node
 }
 class LinkedList
 {
-    Node head;
+     public Node head;
     public LinkedList()
     {
         head=null;
     }
-    public void insertAtFirst(int num)
+    public void insert_at_first(int value)
     {
-        Node newNode=new Node(num);
+        Node temp=new Node(value);
         if(head==null)
         {
-            head=newNode;
+            head=temp;
         }
         else
         {
-            newNode.next=head;
-            head=newNode;
+            temp.next=head;
+            head=temp;
         }
     }
-    public void insertAtLast(int num)
+    public void insert_at_last(int value)
     {
-        Node newNode=new Node(num);
+        Node new_node=new Node(value);
         if(head==null)
-        {
-            head=newNode;
-        }
-        else if(head.next==null)
-        {
-            head.next=newNode;h
-        }
+            head=new_node;
         else
         {
             Node temp=head;
@@ -49,89 +43,138 @@ class LinkedList
             {
                 temp=temp.next;
             }
-            temp.next=newNode;
+            
+            temp.next=new_node;
         }
     }
-    public void insertInBetween(int num,int pos)
+    public void insert_middle(int value,int position)
+    {
+        Node current=head;
+        Node prev=head;
+        while(current.data!=position&&current!=null)
+        {
+            prev=current;
+            current=current.next;
+        }
+            Node new_node=new Node(value);
+            new_node.next=current;
+            prev.next=new_node;  
+    }
+    public void delete_at_first()
+    {
+        if(head==null)
+        {
+            System.out.println("Linked List is empty");
+            return;
+        }
+        head=head.next;
+        display();
+    }
+    public void delete_at_last()
     {
         if(head==null)
         {
             System.out.println("Linked list is empty");
             return;
         }
-        Node newNode=new Node(num);
-        Node curr=head;
-        Node prev=null;
-        while(curr.data!=pos && curr!=null)
-        {
-            prev=curr;
-            curr=curr.next;
-        }
-        if(curr==null)
-        {
-            System.out.println("Linked does not have that pos");
-            return ;
-        }
-        newNode.next=curr.next;
-        curr.next=newNode;
-    }
-    public void deleteFirstNode()
-    {
-        if(head==null)
-        {
-            System.out.println("Linked list is empty");
-            return ;
-        }
-        head=head.next;
-    }
-    public void deleteLastNode()
-    {
-        if(head==null)
-        {
-            System.out.println("Linked list is empty");
-            return ;
-        }
-        else if(head.next==null)
+        if(head.next==null)
         {
             head=null;
-            return ;
+            return;
         }
+        Node temp=head;
+        while(temp.next.next!=null)
+        {
+            temp=temp.next;
+        }
+        temp.next=null;
+        display();
+    }
+    public void delete_at_value(int num)
+    {
+        if(head==null)
+        {
+            System.out.println("Linked list is empty");
+            return;
+        }
+        if(head.data==num)
+        {
+            head=head.next;
+            display();
+            return;
+        }
+        Node current=head;
+        Node prev=null;
+        while(current.data!=num&&current!=null)
+        {
+            prev=current;
+            current=current.next;
+        }
+        if(current==null)
+        {
+            System.out.println("value is not present in linked list");
+            return;
+        }
+        prev.next=current.next;
+        display();
+    }
+    public void display()
+    {
+        if(head==null)
+        {
+            System.out.println("Linked list empty");
+        }
+        else{
+           Node temp=head;
+           while(temp!=null)
+           {
+              if(temp.next!=null)
+              {
+                System.out.print(temp.data+"->");
+                temp=temp.next;
+              }
+              else
+              {
+                System.out.print(temp.data);
+                temp=temp.next;
+              } 
+           } 
+        }
+        System.out.println("");
+    }
+    public void search(int key)
+    {
+        if(head==null)
+            System.out.println("linked list is empty");
         else
         {
             Node temp=head;
-            while(temp.next.next!=null)
+            while(temp!=null && temp.data!=key)
             {
                 temp=temp.next;
             }
-            temp.next=null;
+            if(temp==null)
+                System.out.println("Element is not present");
+            else
+            {
+                System.out.print("Element is present");
+            }
         }
-    }
-    public void deleteAnyNode(int value)
-    {
-        if(head==null)
-        {
-            System.out.println("Linked list is empty");
-            return ;
-        }
-        Node prev=null;
-        Node curr=head;
-        while(curr.data!=value&&curr!=null)
-        {
-            prev=curr;
-            curr=curr.next;
-        }
-        if(curr==null)
-        {
-            System.out.println("Linked list does not have that value");
-            return ;
-        }
-        prev.next=curr.next;
     }
 }
 public class LinkedListImp {
     public static void main(String[] args) {
-        LinkedList l=new LinkedList();
-        l.insertAtFirst(12);
+        LinkedList obj=new LinkedList();//make an empty linked list
+        obj.insert_at_first(10); //10
+        obj.insert_at_first(20); //20->10
+        obj.insert_at_last(25); // 20->10->25
+        obj.insert_at_first(30); //30->20->10->25
+        obj.insert_middle(32,25); //30->20->10->32->25
+        obj.display(); //30->20->10->32->25
+        obj.delete_at_first();//20->10->32->25
+        obj.delete_at_last(); //20->10->32
+        obj.delete_at_value(20);//10->32
+        obj.search(25);//not present
      
     }
 }
